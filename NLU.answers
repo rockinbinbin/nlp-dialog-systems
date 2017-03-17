@@ -1,0 +1,27 @@
+Robin Mehta
+robimeht
+
+First 5 features:
+System Accuracy: 81.7757009346 %
+
+All 8 features:
+System Accuracy: 84.8464619493 %
+
+Caen: (Not sure why it is different)
+System Accuracy: 81.7089452603 %
+
+3 additional features:
+
+1) is_token_last_word feature vector: 1 if word ends in ‘.’ or ‘!’, else 0.
+I noticed that the last word is usually labeled ‘O’. This feature improved the accuracy by 3%.
+
+
+2) is_token_in_paren feature vector: 1 if word is wrapped in (), else 0.
+I noticed that words wrapped in () are often class names, which may be unaccounted for in this algorithm if the words must directly map to class names and IDs. 
+A better option here would be to strip all words of their punctuation to map to class names and IDs before making predictions.
+
+Ex: Professor Winter Viviano teaches in a mono-tone about incredibly tough topics (machine learning) so be prepared to a learn a lot of it yourself
+
+
+3) is_token_EECS feature vector: 1 if word == “EECS”, else 0.
+EECS is a common token in this corpus and is almost always the department name, hence usually labeled ’O.’ This feature did improv the accuracy, but marginally.
